@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .calculator {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .screen {
+            width: 100%;
+            height: 100px;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            font-size: 20px;
+            padding: 15px;
+            border: none;
+            background: #f1f1f1;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #e8e8e8;
+        }
+
+        button:active {
+            background: #ccc;
+        }
+
+        .operator {
+            background: #ff9500;
+            color: white;
+        }
+
+        .operator:hover {
+            background: #ffad33;
+        }
+
+        .operator:active {
+            background: #e08e00;
+        }
+
+        .equal {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="screen" class="screen" disabled>
+        <div class="buttons">
+            <button onclick="clearScreen()">AC</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button onclick="appendCharacter('%')">%</button>
+            <button class="operator" onclick="appendCharacter('/')">/</button>
+            <button onclick="appendCharacter('7')">7</button>
+            <button onclick="appendCharacter('8')">8</button>
+            <button onclick="appendCharacter('9')">9</button>
+            <button class="operator" onclick="appendCharacter('*')">*</button>
+            <button onclick="appendCharacter('4')">4</button>
+            <button onclick="appendCharacter('5')">5</button>
+            <button onclick="appendCharacter('6')">6</button>
+            <button class="operator" onclick="appendCharacter('-')">-</button>
+            <button onclick="appendCharacter('1')">1</button>
+            <button onclick="appendCharacter('2')">2</button>
+            <button onclick="appendCharacter('3')">3</button>
+            <button class="operator" onclick="appendCharacter('+')">+</button>
+            <button onclick="appendCharacter('0')">0</button>
+            <button onclick="appendCharacter('.')">.</button>
+            <button class="operator equal" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+    <script>
+        function appendCharacter(char) {
+            document.getElementById("screen").value += char;
+        }
+        function clearScreen() {
+            document.getElementById("screen").value = "";
+        }
+        function deleteLast() {
+            let screen = document.getElementById("screen");
+            screen.value = screen.value.slice(0, -1);
+        }
+        function calculateResult() {
+            try {
+                document.getElementById("screen").value = eval(document.getElementById("screen").value);
+            } catch {
+                document.getElementById("screen").value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
